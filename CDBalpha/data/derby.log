@@ -1,0 +1,31 @@
+Wed Sep 12 18:23:55 CDT 2018 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
+----------------------------------------------------------------
+Wed Sep 12 18:25:11 CDT 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0165-d019-2a6d-ffffdcaad949 
+on database directory /media/cazucito/MLS/_cc/gdrive/_dev/_projs/CDB/CDBalpha/data/GS_CDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1de0aca6 
+Loaded from file:/media/cazucito/MLS/_cc/gdrive/_dev/_mw/glassfish-4.1.1/javadb/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=10.0.1+10
+user.dir=/media/cazucito/MLS/_cc/gdrive/_dev/_mw/glassfish-4.1.1/javadb
+os.name=Linux
+os.arch=amd64
+os.version=4.9.0-8-amd64
+derby.system.home=/media/cazucito/MLS/_cc/gdrive/_dev/_projs/CDB/CDBalpha/data
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Sep 12 18:25:22 CDT 2018:
+Shutting down instance a816c00e-0165-d019-2a6d-ffffdcaad949 on database directory /media/cazucito/MLS/_cc/gdrive/_dev/_projs/CDB/CDBalpha/data/GS_CDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1de0aca6 
+Wed Sep 12 18:25:22 CDT 2018 Thread[DRDAConnThread_3,5,main] (DATABASE = GS_CDB), (DRDAID = {2}), Database 'GS_CDB' shutdown.
+----------------------------------------------------------------
+Wed Sep 12 18:26:04 CDT 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance 560740aa-0165-d019-2a6d-ffffdcaad949 
+on database directory /media/cazucito/MLS/_cc/gdrive/_dev/_projs/CDB/CDBalpha/data/GS_CDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1de0aca6 
+Loaded from file:/media/cazucito/MLS/_cc/gdrive/_dev/_mw/glassfish-4.1.1/javadb/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=10.0.1+10
+user.dir=/media/cazucito/MLS/_cc/gdrive/_dev/_mw/glassfish-4.1.1/javadb
+os.name=Linux
+os.arch=amd64
+os.version=4.9.0-8-amd64
+derby.system.home=/media/cazucito/MLS/_cc/gdrive/_dev/_projs/CDB/CDBalpha/data
+Database Class Loader started - derby.database.classpath=''
