@@ -1,5 +1,6 @@
 package com.gs.cdb.model.data;
 
+import com.gs.cdb.model.NoExisteClienteException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -49,7 +50,7 @@ public class ClienteDAO {
         return clientes;
     }
 
-    public Cliente obtenCliente(int id) {
+    public Cliente obtenCliente(int id) throws NoExisteClienteException {
         var sqlSelect = "SELECT * FROM cliente WHERE clavecliente=?";
         Connection cxn = null;
         PreparedStatement pStmt = null;
@@ -79,6 +80,10 @@ public class ClienteDAO {
         } finally {
             GestorDeCxnABD.cierraObjeto(rs, pStmt, cxn);
         }
+        if (c == null) {
+            throw new NoExisteClienteException("No existe el cliente con el id: " + id);
+        }
+
         return c;
     }
 
@@ -146,16 +151,19 @@ public class ClienteDAO {
         PreparedStatement pStmt = null;
         ResultSet rs = null;
         DomicilioDAO domDAO = new DomicilioDAO();
-        Cliente c = obtenCliente(idCliente);
+        Cliente c=null;
         try {
+            c = obtenCliente(idCliente);        
             cxn = GestorDeCxnABD.obtenConexion();
             pStmt = cxn.prepareStatement(sqlSelect);
             pStmt.setInt(1, c.getIdCliente());
             int res = pStmt.executeUpdate();
-            
             domDAO.baja(c.getDomicilio());
         } catch (SQLException ex) {
+            //TODO: El método alta debe lanzar excepción
             domDAO.alta(c.getDomicilio());
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoExisteClienteException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             GestorDeCxnABD.cierraObjeto(rs, pStmt, cxn);

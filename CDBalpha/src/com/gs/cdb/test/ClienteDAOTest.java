@@ -1,5 +1,6 @@
 package com.gs.cdb.test;
 
+import com.gs.cdb.model.NoExisteClienteException;
 import com.gs.cdb.model.data.Cliente;
 import com.gs.cdb.model.data.ClienteDAO;
 import com.gs.cdb.model.data.Domicilio;
@@ -7,6 +8,8 @@ import com.gs.cdb.model.data.GestorLlaves;
 import com.gs.cdb.model.data.Portafolio;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClienteDAOTest {
 
@@ -15,9 +18,18 @@ public class ClienteDAOTest {
         System.out.println("||||| MUESTRA CLIENTES");
         dao.obtenListadoClientes().stream().forEach(Cliente::imprimeResumen);
         System.out.println("||||| OBTEN CLIENTE:id=10");
-        dao.obtenCliente(10).imprimeResumen();
-        //System.out.println("CLIENTE:id=00 [NO EXISTE]");
-        //dao.obtenCliente(0).imprimeResumen();
+        try {
+            dao.obtenCliente(10).imprimeResumen();
+        } catch (NoExisteClienteException ex) {
+            Logger.getLogger(ClienteDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("CLIENTE:id=00 [NO EXISTE]");
+        try {
+            dao.obtenCliente(0).imprimeResumen();
+        } catch (NoExisteClienteException ex) {
+            System.out.println("NO EXISTE EL CLIENTE: " + 0);
+            Logger.getLogger(ClienteDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("||||| ALTA CLIENTE");
         int llaveCliente = GestorLlaves.obtenSigLlave("cliente", "clavecliente");
         int llaveDomicilio = GestorLlaves.obtenSigLlave("domicilio", "iddomicilio");
@@ -30,18 +42,44 @@ public class ClienteDAOTest {
                         "ColAlta" + llaveDomicilio, "LocalidadAlta" + llaveDomicilio,
                         "EstadoAlta" + llaveDomicilio, llaveDomicilio), new Portafolio());
         dao.altaCliente(c);
-        dao.obtenCliente(llaveCliente).imprimeResumen();
+        try {
+            dao.obtenCliente(llaveCliente).imprimeResumen();
+        } catch (NoExisteClienteException ex) {
+            Logger.getLogger(ClienteDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("||||| ACTUALIZA CLIENTE");
-        Cliente clienteActualizar = dao.obtenCliente(llaveCliente);
+        Cliente clienteActualizar=null;
+        try {
+            clienteActualizar = dao.obtenCliente(llaveCliente);
+        } catch (NoExisteClienteException ex) {
+            Logger.getLogger(ClienteDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         clienteActualizar.setNombres("ClienteACTUALIZADO" + clienteActualizar.getIdCliente());
         clienteActualizar.getDomicilio().setCalle("CalleACTUALIZADA" + clienteActualizar.getDomicilio().getIdDomicilio());
-        dao.obtenCliente(llaveCliente).imprimeResumen();
+        try {
+            dao.obtenCliente(llaveCliente).imprimeResumen();
+        } catch (NoExisteClienteException ex) {
+            Logger.getLogger(ClienteDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         dao.cambioCliente(clienteActualizar);
-        dao.obtenCliente(llaveCliente).imprimeResumen();
+        try {
+            dao.obtenCliente(llaveCliente).imprimeResumen();
+        } catch (NoExisteClienteException ex) {
+            Logger.getLogger(ClienteDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("||||| BAJA CLIENTE");
-        dao.obtenCliente(llaveCliente).imprimeResumen();
+        try {
+            dao.obtenCliente(llaveCliente).imprimeResumen();
+        } catch (NoExisteClienteException ex) {
+            Logger.getLogger(ClienteDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         dao.bajaCliente(llaveCliente);
-        Cliente clienteBorrado = dao.obtenCliente(llaveCliente);
+        Cliente clienteBorrado=null;
+        try {
+            clienteBorrado = dao.obtenCliente(llaveCliente);
+        } catch (NoExisteClienteException ex) {
+            Logger.getLogger(ClienteDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (clienteBorrado != null) {
             clienteBorrado.imprimeResumen();
         } else {
